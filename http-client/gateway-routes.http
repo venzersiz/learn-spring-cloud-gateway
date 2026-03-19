@@ -1,0 +1,39 @@
+### Gateway 기본 주소 (로컬)
+@origin = http://localhost:8080
+
+### ============================================
+### 1. httpbin-get: /get -> https://httpbin.org
+### ============================================
+GET {{origin}}/get
+Accept: application/json
+
+###
+
+### ============================================
+### 2. local-api: /api/** -> http://localhost:8081
+### (8081에서 백엔드 서비스가 떠 있어야 함)
+### ============================================
+GET {{origin}}/api/hello
+Accept: application/json
+
+###
+
+GET {{origin}}/api/users
+Accept: application/json
+
+###
+
+### ============================================
+### 3. httpbin-delay: /delay/** -> https://httpbin.org
+### (지연 응답 테스트, 기본 0초)
+### ============================================
+GET {{origin}}/delay/0
+Accept: application/json
+
+###
+
+### 3초 지연 후 응답
+GET {{origin}}/delay/3
+Accept: application/json
+
+###

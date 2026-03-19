@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: learn-spring-cloud-gateway
+  cloud:
+    gateway:
+      routes:
+        # 예: /get 요청을 httpbin.org로 전달 (테스트용)
+        - id: httpbin-get
+          uri: https://httpbin.org
+          predicates:
+            - Path=/get
+
+        # 예: /api/** 를 로컬 백엔드 서비스로 전달
+        - id: local-api
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/**
+
+        # 예: /delay/** 를 httpbin delay API로 (지연 응답 테스트)
+        - id: httpbin-delay
+          uri: https://httpbin.org
+          predicates:
+            - Path=/delay/**
