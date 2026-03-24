@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: httpbin-get
+          uri: https://httpbin.org
+          predicates:
+            - Path=/get
+
+        - id: local-api
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/**
+
+        - id: httpbin-delay
+          uri: https://httpbin.org
+          predicates:
+            - Path=/delay/**
