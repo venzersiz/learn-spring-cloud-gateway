@@ -1,0 +1,49 @@
+### Config Server 기본 주소 (config-server 모듈 기본 포트)
+@origin = http://localhost:8888
+
+### 애플리케이션 이름 = config-repo의 파일명(확장자 제외) = Gateway의 spring.application.name
+@application = a-gateway
+@profile = default
+@label = main
+
+### ============================================
+### JSON: 전체 환경 (propertySources 포함)
+### GET /{application}/{profile}[/{label}]
+### ============================================
+GET {{origin}}/{{application}}/{{profile}}
+Accept: application/json
+
+###
+
+GET {{origin}}/{{application}}/{{profile}}/{{label}}
+Accept: application/json
+
+###
+
+### ============================================
+### YAML: 원본에 가깝게 반환
+### GET /{application}-{profile}.yml
+### ============================================
+GET {{origin}}/{{application}}-{{profile}}.yml
+Accept: application/x-yaml
+
+###
+
+### ============================================
+### Properties 형식
+### GET /{application}-{profile}.properties
+### ============================================
+GET {{origin}}/{{application}}-{{profile}}.properties
+Accept: text/plain
+
+###
+
+### ============================================
+### 라벨을 경로 앞에 두는 형식 (Git 백엔드 등에서 흔함)
+### GET /{label}/{application}-{profile}.yml
+### native 프로파일에서도 동작 여부는 환경에 따라 다를 수 있음
+### ============================================
+GET {{origin}}/{{label}}/{{application}}-{{profile}}.yml
+Accept: application/x-yaml
+
+###
